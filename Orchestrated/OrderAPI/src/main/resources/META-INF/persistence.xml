@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd" version="3.1">
+    <persistence-unit name="OrderAPIPU" transaction-type="JTA">
+        <jta-data-source>OrderAPIDS</jta-data-source>
+        <class>com.sagademo.orderapi.model.Order</class>
+        <class>com.sagademo.orderapi.model.OrderDetail</class>
+        <properties>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="hibernate.column_ordering_strategy" value="legacy"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+        </properties>
+    </persistence-unit>
+</persistence>
