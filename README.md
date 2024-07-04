@@ -262,11 +262,9 @@ WarehouseAPI
 
 ![warehouse-participant-failure2.png](images/warehouse-participant-failure2.png)
 
-In this scenario, a business exception was triggered by WarehouseAPI due to a lack of inventory for the specified product. 
-If the saga is functioning correctly, the database should remain in a consistent state. 
-This means that the order created in OrderAPI should be invalidated to reflect the failure in the process.
 
-To verify the state, you can use the following endpoint:
+
+To verify the state the order and the reservation, you can use the following endpoint:
 
 OrderAPI
 
