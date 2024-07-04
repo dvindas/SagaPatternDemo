@@ -152,7 +152,7 @@ curl --location 'http://localhost:8081/api/orderProcessor/placeOrder' \
         "quantity": 1
     }
 }'
-
+```
 
 Response:
 
@@ -275,6 +275,7 @@ curl --location 'http://localhost:8082/api/orders'
 ```
 
 Response:
+
 ![get-orders-failure2](images/get-orders-failure2.png)
 
 WarehouseAPI
