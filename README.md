@@ -157,7 +157,7 @@ curl --location 'http://localhost:8081/api/orderProcessor/placeOrder' \
 Response:
 
 HTTP Status 409
-```
+```sh
 {
     "errorCode": 1,
     "message": "There is no inventory for the product.",
