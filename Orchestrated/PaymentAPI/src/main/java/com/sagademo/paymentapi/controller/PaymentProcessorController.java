@@ -1,8 +1,8 @@
 package com.sagademo.paymentapi.controller;
 
 import com.sagademo.paymentapi.helper.JsonHelper;
-import com.sagademo.paymentapi.controller.dto.PaymentRequestDTO;
-import com.sagademo.paymentapi.controller.dto.PaymentResponseDTO;
+import com.sagademo.paymentapi.dto.PaymentRequestDTO;
+import com.sagademo.paymentapi.dto.PaymentResponseDTO;
 import com.sagademo.paymentapi.service.PaymentProcessorService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

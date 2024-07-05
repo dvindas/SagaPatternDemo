@@ -5,6 +5,8 @@
 
 This example demonstrates how to implement an Orchestrated Saga using [MicroProfile LRA](https://download.eclipse.org/microprofile/microprofile-lra-2.0/microprofile-lra-spec-2.0.html) with [Helidon](https://helidon.io/).
 
+For more details, please visit my article [Saga Pattern: Ensuring Data Consistency in Microservices](https://www.linkedin.com/in/diego-perez-vindas/recent-activity/articles/)
+
 The implemented saga is shown below:
 
 ![saga.png](images/saga.png)
@@ -88,7 +90,7 @@ curl --location 'http://localhost:8081/api/orderProcessor/placeOrder' \
 Response Example:
 
 HTTP Status 200
-```sh
+```
 {
     "correlationLRAId": "http://lra-coordinator:8080/lra-coordinator/0_ffffac180002_83ff_6686e16f_2",
     "orderId": "c1676076-9045-40bd-9c97-d374757e1eaf",
@@ -96,7 +98,7 @@ HTTP Status 200
     "reservationId": "0320e65a-9f67-4365-9225-d83572e3147a"
 }
 ```
-#### Participants Logs
+#### LRA Participants Logs
 
 OrderProcessorAPI
 
@@ -117,7 +119,7 @@ PaymentAPI
 As you can see, the saga was executed successfully as a whole. Each participant performed its respective logic and was subsequently notified about the saga's completion. 
 The endpoints annotated with @Complete and @AfterLRA were correctly invoked at the end.
 
-To verify the state, you can use the following endpoints:
+To verify the system state, you can use the following endpoints:
 
 1. Request to get orders - OrderAPI
 ```
@@ -138,7 +140,7 @@ Response
 
 #### Failure Case #1
 
-To produce a failure, we will request a product that doesn't exist.
+To produce a failure, I will request a product that doesn't exist.
 
 Request:
 ```sh
@@ -157,7 +159,7 @@ curl --location 'http://localhost:8081/api/orderProcessor/placeOrder' \
 Response:
 
 HTTP Status 409
-```sh
+```
 {
     "errorCode": 1,
     "message": "There is no inventory for the product.",
@@ -183,6 +185,8 @@ If the saga In this scenario, a business exception was triggered by WarehouseAPI
 If the saga is functioning correctly, the database should remain in a consistent state. This means that the order created in OrderAPI should be invalidated to reflect the failure in the process.
 
 To verify the state, you can use the following endpoint:
+
+Request to get orders - OrderAPI
 
 ```sh
 curl --location 'http://localhost:8082/api/orders'
@@ -247,7 +251,7 @@ HTTP Status 409
 }
 ```
 
-#### Participants Logs
+#### LRA Participants Logs
 
 
 OrderProcessorAPI
@@ -262,11 +266,13 @@ WarehouseAPI
 
 ![warehouse-participant-failure2.png](images/warehouse-participant-failure2.png)
 
-
+In this other scenario, a business exception was triggered by PaymentAPI due to a payment-related issue.
+If the saga is functioning correctly, the system state should remain consistent.
+In this specific case, the order and the reservation should be semantically rolled back, as shown in the images above.
 
 To verify the state the order and the reservation, you can use the following endpoint:
 
-OrderAPI
+1. Request to get orders - OrderAPI
 
 ```sh
 curl --location 'http://localhost:8082/api/orders'
@@ -276,7 +282,7 @@ Response:
 
 ![get-orders-failure2](images/get-orders-failure2.png)
 
-WarehouseAPI
+2. Request to get reservations - WarehouseAPI
 
 ```sh
 curl --location 'http://localhost:8083/api/inventoryReservations'
@@ -285,15 +291,11 @@ Response:
 
 ![get-reservations-failure2](images/get-reservations-failure2.png)
 
-In this other scenario, a business exception was triggered by PaymentAPI due to a payment-related issue. 
-If the saga is functioning correctly, the system state should remain consistent.
-In this specific case, the order and the reservation should be semantically rolled back, as shown in the images above.
-
 
 ### Requirements
 
 - **Java:** Version 21.
-- **Maven:** Version 3.9.6 or higher is preferable.
+- **Maven:** Version 3.8.4 or higher is preferable.
 - **Docker:** Version 20.10.24 or higher is preferable.
 
 ### License

@@ -1,4 +1,4 @@
-package com.sagademo.paymentapi.controller.dto;
+package com.sagademo.paymentapi.dto;
 
 import java.math.BigDecimal;
 

@@ -1,7 +1,7 @@
-package com.sagademo.warehouseapi.controller.mapper;
+package com.sagademo.warehouseapi.mapper;
 
-import com.sagademo.warehouseapi.controller.dto.ReserveRequestDTO;
-import com.sagademo.warehouseapi.controller.dto.ReserveResponseDTO;
+import com.sagademo.warehouseapi.dto.ReserveRequestDTO;
+import com.sagademo.warehouseapi.dto.ReserveResponseDTO;
 import com.sagademo.warehouseapi.model.InventoryReservation;
 import jakarta.enterprise.context.ApplicationScoped;
 

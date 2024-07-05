@@ -1,7 +1,7 @@
 package com.sagademo.warehouseapi.controller;
 
-import com.sagademo.warehouseapi.controller.dto.ReserveRequestDTO;
-import com.sagademo.warehouseapi.controller.mapper.InventoryMapper;
+import com.sagademo.warehouseapi.dto.ReserveRequestDTO;
+import com.sagademo.warehouseapi.mapper.InventoryMapper;
 import com.sagademo.warehouseapi.helper.JsonHelper;
 import com.sagademo.warehouseapi.service.InventoryService;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -18,7 +18,6 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.net.URI;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
