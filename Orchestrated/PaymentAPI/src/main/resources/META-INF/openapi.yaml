@@ -1,0 +1,7 @@
+openapi: 3.0.3
+info:
+  title: PaymentAPI
+  version: 1.0.0
+  description: Saga Demo with Helidon
+  contact:
+    name: dperez

@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  lra-coordinator:
+    image: quay.io/jbosstm/lra-coordinator:latest
+    container_name: lra-coordinator
+    ports:
+      - "8070:8080"
+    networks:
+      - saga-demo-network
+
+  orderprocessorapi:
+    image: orderprocessorapi
+    container_name: orderprocessorapi
+    ports:
+      - "8081:8081"
+    networks:
+      - saga-demo-network
+    environment:
+      - LRA_COORDINATOR_URL=${LRA_COORDINATOR_URL}
+      - LRA_PARTICIPANT_ORDERPROCESSOR_API_URL=${LRA_PARTICIPANT_ORDERPROCESSOR_API_URL}
+      - ORDER_API_URL=${ORDER_API_URL}
+      - WAREHOUSE_API_URL=${WAREHOUSE_API_URL}
+      - PAYMENT_API_URL=${PAYMENT_API_URL}
+    depends_on:
+      - lra-coordinator
+
+  orderapi:
+    image: orderapi
+    container_name: orderapi
+    ports:
+      - "8082:8082"
+    networks:
+      - saga-demo-network
+    environment:
+      - LRA_COORDINATOR_URL=${LRA_COORDINATOR_URL}
+      - LRA_PARTICIPANT_ORDER_API_URL=${LRA_PARTICIPANT_ORDER_API_URL}
+    depends_on:
+      - lra-coordinator
+
+  warehouseapi:
+    image: warehouseapi
+    container_name: warehouseapi
+    ports:
+      - "8083:8083"
+    networks:
+      - saga-demo-network
+    environment:
+      - LRA_COORDINATOR_URL=${LRA_COORDINATOR_URL}
+      - LRA_PARTICIPANT_WAREHOUSE_API_URL=${LRA_PARTICIPANT_WAREHOUSE_API_URL}
+    depends_on:
+      - lra-coordinator
+
+  paymentapi:
+    image: paymentapi
+    container_name: paymentapi
+    ports:
+      - "8084:8084"
+    networks:
+      - saga-demo-network
+    environment:
+      - LRA_COORDINATOR_URL=${LRA_COORDINATOR_URL}
+      - LRA_PARTICIPANT_PAYMENT_API_URL=${LRA_PARTICIPANT_PAYMENT_API_URL}
+    depends_on:
+      - lra-coordinator
+
+networks:
+  saga-demo-network:
+    driver: bridge
